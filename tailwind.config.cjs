@@ -1,15 +1,29 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { fontFamily } = require("tailwindcss/defaultTheme")
+const defaultTheme = require("tailwindcss/defaultTheme")
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class", '[data-theme="dark"]'],
-  content: ["app/**/*.{ts,tsx}", "components/**/*.{ts,tsx}"],
+  content: ["./src/components/**/*.{ts,tsx}", "./src/pages/**/*.{ts,tsx}",],
   theme: {
     extend: {
+      colors: {
+        primary: {
+          300: "#6ee7b7",
+          400: "#34d399",
+          500: "#10b981",
+          600: "#059669",
+          700: "#047857",
+          800: "#065f46",
+        },
+        success: "#0ea5e9",
+        error: "#e11d48",
+        dark: "#0f172a",
+        light: "#e4e4e7"
+      },
       fontFamily: {
         // syne font is the marketing font
-        sans: ["var(--syne-font)", ...fontFamily.sans],
+        sans: ["var(--syne-font)", ...defaultTheme.fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {

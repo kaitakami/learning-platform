@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --grid-gradient-start: hsla(0, 0%, 90%, 1);
+  --grid-gradient-end: hsla(0, 0%, 90%, 0.8);
+  --grid-line-color: #555;
+  --grid-bg-color: #f2f2f2;
+}
+
+[data-theme='dark'] {
+  --grid-gradient-start: hsla(0, 0%, 7%, 1);
+  --grid-gradient-end: hsla(0, 0%, 7%, 0.8);
+  --grid-line-color: #bbb;
+  --grid-bg-color: #111;
+
+}
+
+.grid-pattern {
+  background: var(--grid-bg-color);
+  background-image: linear-gradient(35deg,
+      var(--grid-gradient-start),
+      80%,
+      var(--grid-gradient-end)),
+    linear-gradient(var(--grid-line-color) 1px, transparent 0),
+    linear-gradient(90deg, var(--grid-line-color) 1px, transparent 0);
+  background-size: 100% 100%, 2vw 2vw, 2vw 2vw;
+}

@@ -28,7 +28,7 @@ const HeroSection = () => {
             className="mb-4 text-3xl sm:text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl bg-gradient-to-tr dark:from-gray-100 dark:to-slate-300 from-slate-700 to-slate-900 bg-clip-text text-transparent capitalize"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
           >
             Become a Full Stack Developer: Learn By Coding
           </motion.h1>
@@ -36,7 +36,7 @@ const HeroSection = () => {
             className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
+            transition={{ duration: 0.8, delay: 1 }}
           >
             Level up your full stack skills with our platform! Our self-paced courses and <span className="dark:text-white text-zinc-800">learn-by-doing</span> approach will have you building impressive projects in no time. Get help from our supportive community, and access plenty of resources along the way. Plus, our beta stage means it&apos;s <span className="dark:text-white text-zinc-800">completely free</span> to join right now. Don&apos;t wait - sign up today and become a full stack dev ✨
           </motion.p>
@@ -44,7 +44,7 @@ const HeroSection = () => {
             className="flex gap-4 flex-col xs:flex-row"
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ ease: "easeOut", duration: 0.5, delay: 0.9 }}
+            transition={{ ease: "easeOut", duration: 0.7, delay: 1.6 }}
           >
             <Link className={`${buttonVariants({ variant: "colored" })}`} href="/pricing">
               Free Just Now
@@ -83,7 +83,7 @@ const AnimatedCard = () => {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5, delay: 1.1 }}
+      transition={{ duration: 0.8, delay: 2 }}
       ref={ref}
       onMouseMove={mouseMove}
       onMouseOver={() => setMouseOverCard(true)}

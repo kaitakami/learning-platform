@@ -21,6 +21,9 @@ module.exports = {
         dark: "#0f172a",
         light: "#e4e4e7"
       },
+      screens: {
+        'xs': '400px',
+      },
       fontFamily: {
         // syne font is the marketing font
         sans: ["var(--syne-font)", ...defaultTheme.fontFamily.sans],

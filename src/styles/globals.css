@@ -3,18 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --grid-gradient-start: hsla(0, 0%, 90%, 1);
+  --grid-gradient-start: hsla(0, 0%, 90%, 0.98);
   --grid-gradient-end: hsla(0, 0%, 90%, 0.8);
   --grid-line-color: #555;
   --grid-bg-color: #f2f2f2;
+  --border-start: #bfbfbf;
+  --border-end: #8c8c8c;
 }
 
 [data-theme='dark'] {
-  --grid-gradient-start: hsla(0, 0%, 7%, 1);
+  --grid-gradient-start: hsla(0, 0%, 7%, 0.94);
   --grid-gradient-end: hsla(0, 0%, 7%, 0.8);
   --grid-line-color: #bbb;
   --grid-bg-color: #111;
-
+  --border-start: #555;
+  --border-end: #222;
 }
 
 .grid-pattern {
@@ -26,4 +29,10 @@
     linear-gradient(var(--grid-line-color) 1px, transparent 0),
     linear-gradient(90deg, var(--grid-line-color) 1px, transparent 0);
   background-size: 100% 100%, 2vw 2vw, 2vw 2vw;
+}
+
+.border-gradient {
+  border-image: linear-gradient(var(--border-start), var(--border-end)) 30;
+  border-width: 4px;
+  border-style: solid;
 }

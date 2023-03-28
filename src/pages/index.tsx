@@ -21,7 +21,7 @@ import { useRef, useState } from "react";
 
 const HeroSection = () => {
   return (
-    <section className="grid-pattern h-screen flex items-center">
+    <section className="grid-pattern min-h-screen flex items-center">
       <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-16 lg:py-16 lg:grid-cols-12">
         <div className="max-w-4xl mr-auto place-self-center lg:col-span-7 xl:col-span-8 md:col-span-6">
           <motion.h1
@@ -41,12 +41,11 @@ const HeroSection = () => {
             Level up your full stack skills with our platform! Our self-paced courses and <span className="dark:text-white text-zinc-800">learn-by-doing</span> approach will have you building impressive projects in no time. Get help from our supportive community, and access plenty of resources along the way. Plus, our beta stage means it&apos;s <span className="dark:text-white text-zinc-800">completely free</span> to join right now. Don&apos;t wait - sign up today and become a full stack dev ✨
           </motion.p>
           <motion.div
-            className="flex gap-4"
+            className="flex gap-4 flex-col xs:flex-row"
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ ease: "easeOut", duration: 0.5, delay: 0.9 }}
           >
-
             <Link className={`${buttonVariants({ variant: "colored" })}`} href="/pricing">
               Free Just Now
             </Link>

@@ -1,4 +1,6 @@
 import type { ReactElement } from "react"
+import Navbar from "./Navbar"
+
 import { Syne } from "next/font/google"
 
 const syne = Syne(
@@ -12,6 +14,7 @@ const syne = Syne(
 const Layout = (props: { children: ReactElement | ReactElement[] }) => {
   return (
     <div className={`${syne.className} font-sans`}>
+      <Navbar />
       {props.children}
     </div>
   )

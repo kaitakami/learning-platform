@@ -22,7 +22,7 @@ import { useRef, useState } from "react";
 const HeroSection = () => {
   return (
     <section className="grid-pattern min-h-screen flex items-center">
-      <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-16 lg:py-16 lg:grid-cols-12">
+      <div className="grid max-w-screen-xl px-4 py-14 mx-auto lg:gap-8 md:py-20 xl:gap-16 lg:grid-cols-12">
         <div className="max-w-4xl mr-auto place-self-center lg:col-span-7 xl:col-span-8 md:col-span-6">
           <motion.h1
             className="mb-4 text-3xl sm:text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl bg-gradient-to-tr dark:from-gray-100 dark:to-slate-300 from-slate-700 to-slate-900 bg-clip-text text-transparent capitalize"

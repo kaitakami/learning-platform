@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useState } from "react";
 import { useTheme } from 'next-themes';
 import Link from "next/link"
 import { motion } from "framer-motion";
@@ -48,12 +47,7 @@ const courses: { title: string; href: string; description: string }[] = [
 ]
 
 const Navbar = () => {
-  const { theme: themeSSR, setTheme: setThemeSSR } = useTheme()
-  const [theme, setTheme] = useState<string | undefined>(undefined)
-
-  React.useEffect(() => {
-    setTheme(themeSSR)
-  }, [themeSSR])
+  const { theme, setTheme } = useTheme()
 
   return (
     <motion.div
@@ -65,7 +59,7 @@ const Navbar = () => {
       <NavigationMenu className="absolute top-0 p-3 mx-auto max-w-7xl justify-between w-full">
         <NavigationMenuList className="max-w-xl mx-auto w-full gap-0.5 sm:gap-2">
           <Link href="/" className="flex items-center font-bold gap-1 sm:gap-2">
-            <Logo className="w-8 h-8" fill={theme === "dark" ? "#EFEFEF" : undefined} />
+            {theme === "dark" ? <Logo className="w-8 h-8" fill="#EFEFEF" /> : <Logo className="w-8 h-8" />}
             <span className="text-xl hidden sm:block">Enzan</span>
           </Link>
           <NavigationMenuItem>
@@ -78,7 +72,7 @@ const Navbar = () => {
                       className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-br from-gray-700 to-slate-900 dark:from-white dark:to-stone-200 p-6 no-underline outline-none focus:shadow-md"
                       href="/"
                     >
-                      <Logo className="w-8 h-8" fill={theme === "dark" ? undefined : "#EFEFEF"} />
+                      {theme === "light" ? <Logo className="w-8 h-8" fill="#EFEFEF" /> : <Logo className="w-8 h-8" />}
                       <div className="mt-4 mb-2 text-lg font-medium text-white dark:text-black">
                         Enzan Learn
                       </div>
@@ -127,7 +121,7 @@ const Navbar = () => {
         </NavigationMenuList>
         <div className="space-x-2 items-center flex">
           <Button variant="link" size="sm" onClick={() => { signIn().catch(err => console.log(err)) }}><span className="sm:block hidden">Sign in</span><User className="sm:hidden" /></Button>
-          <Button size="sm" onClick={() => setThemeSSR(theme === "dark" ? "light" : "dark")}><SunMoon /></Button>
+          <Button size="sm" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}><SunMoon /></Button>
         </div>
       </NavigationMenu>
     </motion.div>

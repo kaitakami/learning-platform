@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 import Layout from "../components/marketing/Layout";
 import Link from "next/link";
 import { buttonVariants } from "../components/ui/button";
+import { Button } from "../components/ui/button";
 import { ArrowRight, Briefcase, Gamepad, Keyboard, PiggyBank, Ship, Timer } from "lucide-react"
 
 const Home: NextPage = () => {
@@ -18,19 +19,20 @@ const Home: NextPage = () => {
 export default Home;
 
 import { useRef, useState } from "react";
+import { signIn } from 'next-auth/react';
 
 const HeroSection = () => {
   return (
     <section className="grid-pattern min-h-screen flex items-center">
-      <div className="grid max-w-screen-xl px-4 py-14 mx-auto lg:gap-8 md:py-20 xl:gap-16 lg:grid-cols-12">
+      <div className="grid max-w-screen-xl px-4 py-22 mx-auto lg:gap-8 md:py-20 xl:gap-16 lg:grid-cols-12">
         <div className="max-w-4xl mr-auto place-self-center lg:col-span-7 xl:col-span-8 md:col-span-6">
           <motion.h1
-            className="mb-4 text-3xl sm:text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl bg-gradient-to-tr dark:from-gray-100 dark:to-slate-300 from-slate-700 to-slate-900 bg-clip-text text-transparent capitalize"
+            className="mb-4 text-4xl sm:text-5xl font-extrabold tracking-tight leading-none xl:text-6xl bg-gradient-to-tr dark:from-gray-100 dark:to-slate-300 from-slate-700 to-slate-900 bg-clip-text text-transparent capitalize"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            Become a Full Stack Developer: Learn By Coding
+            Become a Full Stack Developer:<span className="sm:block hidden"> Learn By Coding</span>
           </motion.h1>
           <motion.p
             className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"
@@ -38,7 +40,7 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
           >
-            Level up your full stack skills with our platform! Our self-paced courses and <span className="dark:text-white text-zinc-800">learn-by-doing</span> approach will have you building impressive projects in no time. Get help from our supportive community, and access plenty of resources along the way. Plus, our beta stage means it&apos;s <span className="dark:text-white text-zinc-800">completely free</span> to join right now. Don&apos;t wait - sign up today and become a full stack dev ✨
+            Level up your full stack skills with Enzan Learn! Our self-paced courses and <span className="dark:text-white text-zinc-800">learn-by-doing</span> approach will have you building impressive projects in no time - <span className="dark:text-white text-zinc-800">sign up free today</span> and become a full stack dev ✨
           </motion.p>
           <motion.div
             className="flex gap-4 flex-col xs:flex-row"
@@ -49,9 +51,9 @@ const HeroSection = () => {
             <Link className={`${buttonVariants({ variant: "colored" })}`} href="/pricing">
               Free Just Now
             </Link>
-            <Link className={`dark:hover:shadow-white/75 hover:shadow-sm hover:shadow-black/25  ${buttonVariants({ size: "lg" })} group`} href="signup">
+            <Button className="dark:hover:shadow-white/75 hover:shadow-sm hover:shadow-black/25 group" size="lg" onClick={() => { signIn().catch(err => console.log(err)) }}>
               Start Learning<ArrowRight className="group-hover:translate-x-3 transition-transform" />
-            </Link>
+            </Button>
           </motion.div>
         </div>
         <div className="lg:mt-0 lg:col-span-4 lg:flex md:col-span-6 pt-12 lg:pt-0">

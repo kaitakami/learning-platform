@@ -4,6 +4,7 @@ import * as React from "react"
 import { useState } from "react";
 import { useTheme } from 'next-themes';
 import Link from "next/link"
+import { motion } from "framer-motion";
 
 import { cn } from "@/src/utils/cn"
 
@@ -55,7 +56,12 @@ const Navbar = () => {
   }, [themeSSR])
 
   return (
-    <div className="w-full max-w-7xl mx-auto">
+    <motion.div
+      className="w-full max-w-7xl mx-auto"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 2 }}
+    >
       <NavigationMenu className="absolute top-0 p-3 mx-auto max-w-7xl justify-between w-full">
         <NavigationMenuList className="max-w-xl mx-auto w-full gap-0.5 sm:gap-2">
           <Link href="/" className="flex items-center font-bold gap-1 sm:gap-2">
@@ -124,7 +130,7 @@ const Navbar = () => {
           <Button size="sm" onClick={() => setThemeSSR(theme === "dark" ? "light" : "dark")}><SunMoon /></Button>
         </div>
       </NavigationMenu>
-    </div>
+    </motion.div>
   )
 }
 

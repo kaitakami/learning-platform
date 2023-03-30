@@ -59,7 +59,7 @@ const Navbar = () => {
       <NavigationMenu className="absolute top-0 p-3 mx-auto max-w-7xl justify-between w-full">
         <NavigationMenuList className="max-w-xl mx-auto w-full gap-0.5 sm:gap-2">
           <Link href="/" className="flex items-center font-bold gap-1 sm:gap-2">
-            {theme === "dark" ? <Logo className="w-8 h-8" fill="#EFEFEF" /> : <Logo className="w-8 h-8" />}
+            {theme === "dark" || !theme ? <Logo className="w-8 h-8" fill="#EFEFEF" /> : <Logo className="w-8 h-8" />}
             <span className="text-xl hidden sm:block">Enzan</span>
           </Link>
           <NavigationMenuItem>
@@ -72,7 +72,7 @@ const Navbar = () => {
                       className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-br from-gray-700 to-slate-900 dark:from-white dark:to-stone-200 p-6 no-underline outline-none focus:shadow-md"
                       href="/"
                     >
-                      {theme === "light" ? <Logo className="w-8 h-8" fill="#EFEFEF" /> : <Logo className="w-8 h-8" />}
+                      {theme === "dark" || !theme ? <Logo className="w-8 h-8" /> : <Logo className="w-8 h-8" fill="#EFEFEF" />}
                       <div className="mt-4 mb-2 text-lg font-medium text-white dark:text-black">
                         Enzan Learn
                       </div>

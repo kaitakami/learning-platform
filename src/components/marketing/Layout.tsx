@@ -7,7 +7,8 @@ const syne = Syne(
   {
     subsets: ["latin"],
     variable: "--syne-font",
-    weight: ["400", "500", "600", "700", "800"]
+    weight: ["400", "500", "600", "700", "800"],
+    fallback: ["sans-serif"]
   }
 )
 

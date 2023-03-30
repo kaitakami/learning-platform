@@ -1,5 +1,3 @@
-"use client"
-
 import { type NextPage } from "next";
 import { motion } from "framer-motion"
 import Layout from "../components/marketing/Layout";
@@ -29,7 +27,7 @@ const HeroSection = () => {
       <div className="grid max-w-screen-xl px-4 py-22 mx-auto lg:gap-8 md:py-20 xl:gap-16 lg:grid-cols-12">
         <div className="max-w-4xl mr-auto place-self-center lg:col-span-7 xl:col-span-8 md:col-span-6">
           <motion.h1
-            className="mb-4 text-4xl sm:text-5xl font-extrabold tracking-tight leading-none xl:text-6xl bg-gradient-to-tr dark:from-gray-100 dark:to-slate-300 from-slate-700 to-slate-900 bg-cl  ip-text text-transparent capitalize"
+            className="mb-4 text-4xl sm:text-5xl font-extrabold tracking-tight leading-none xl:text-6xl bg-gradient-to-tr dark:from-gray-100 dark:to-slate-300 from-slate-700 to-slate-900 bg-clip-text text-transparent capitalize"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}

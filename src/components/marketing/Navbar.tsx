@@ -14,9 +14,11 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/src/components/ui/navigation-menu"
 import { Logo } from "../logo"
+import { Button } from "../ui/button";
+import { Github, SunMoon, User } from "lucide-react";
+import { signIn } from "next-auth/react";
 
 const courses: { title: string; href: string; description: string }[] = [
   {
@@ -45,7 +47,7 @@ const courses: { title: string; href: string; description: string }[] = [
 ]
 
 const Navbar = () => {
-  const { theme: themeSSR } = useTheme()
+  const { theme: themeSSR, setTheme: setThemeSSR } = useTheme()
   const [theme, setTheme] = useState<string | undefined>(undefined)
 
   React.useEffect(() => {
@@ -54,12 +56,12 @@ const Navbar = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto">
-      <NavigationMenu className="absolute top-0 p-3 mx-auto max-w-5xl">
-        <NavigationMenuList className="max-w-xl mx-auto w-full gap-0.5 xs:gap-2">
-          <div className="flex items-center font-bold gap-2">
+      <NavigationMenu className="absolute top-0 p-3 mx-auto max-w-7xl justify-between w-full">
+        <NavigationMenuList className="max-w-xl mx-auto w-full gap-0.5 sm:gap-2">
+          <Link href="/" className="flex items-center font-bold gap-1 sm:gap-2">
             <Logo className="w-8 h-8" fill={theme === "dark" ? "#EFEFEF" : undefined} />
             <span className="text-xl hidden sm:block">Enzan</span>
-          </div>
+          </Link>
           <NavigationMenuItem>
             <NavigationMenuTrigger>Overview</NavigationMenuTrigger>
             <NavigationMenuContent>
@@ -92,7 +94,7 @@ const Navbar = () => {
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
-          <NavigationMenuItem>
+          <NavigationMenuItem className="hidden sm:block">
             <NavigationMenuTrigger>Learn</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
@@ -108,14 +110,19 @@ const Navbar = () => {
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
-          <NavigationMenuItem>
+          <NavigationMenuItem className="px-0">
             <Link href="https://github.com/kaitakami/" target="_blank" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Github
+              <NavigationMenuLink>
+                <span className="sm:block hidden">Github</span>
+                <Button size="sm" className="sm:hidden"><Github /></Button>
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
         </NavigationMenuList>
+        <div className="space-x-2 items-center flex">
+          <Button variant="link" size="sm" onClick={() => { signIn().catch(err => console.log(err)) }}><span className="sm:block hidden">Sign in</span><User className="sm:hidden" /></Button>
+          <Button size="sm" onClick={() => setThemeSSR(theme === "dark" ? "light" : "dark")}><SunMoon /></Button>
+        </div>
       </NavigationMenu>
     </div>
   )

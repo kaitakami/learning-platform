@@ -17,7 +17,7 @@ import {
 } from "@/src/components/ui/navigation-menu"
 import { Logo } from "../logo"
 import { Button } from "../ui/button";
-import { Github, SunMoon, User } from "lucide-react";
+import { SunMoon, User } from "lucide-react";
 import { signIn } from "next-auth/react";
 
 const courses: { title: string; href: string; description: string }[] = [
@@ -46,15 +46,14 @@ const courses: { title: string; href: string; description: string }[] = [
   }
 ]
 
-const Navbar = () => {
+const Navbar = ({ delay = 0}) => {
   const { theme, setTheme } = useTheme()
-
   return (
     <motion.div
       className="w-full max-w-7xl mx-auto"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 2 }}
+      transition={{ duration: 0.8, delay }}
     >
       <NavigationMenu className="absolute top-0 p-3 mx-auto max-w-7xl justify-between w-full">
         <NavigationMenuList className="max-w-xl mx-auto w-full gap-0.5 sm:gap-2">
@@ -114,7 +113,6 @@ const Navbar = () => {
             <Link href="https://github.com/kaitakami/" target="_blank" legacyBehavior passHref>
               <NavigationMenuLink>
                 <span className="sm:block hidden">Github</span>
-                <Button size="sm" className="sm:hidden"><Github /></Button>
               </NavigationMenuLink>
             </Link>
           </NavigationMenuItem>
@@ -139,13 +137,13 @@ const ListItem = React.forwardRef<
           href={href || ""}
           ref={ref}
           className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-slate-100 focus:bg-slate-100 dark:hover:bg-slate-700 dark:focus:bg-slate-700",
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-stone-100 focus:bg-stone-100 dark:hover:bg-stone-700 dark:focus:bg-stone-700",
             className
           )}
           {...props}
         >
           <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-slate-500 dark:text-slate-400">
+          <p className="line-clamp-2 text-sm leading-snug text-stone-500 dark:text-stone-400">
             {children}
           </p>
         </Link>

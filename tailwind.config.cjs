@@ -4,7 +4,11 @@ const defaultTheme = require("tailwindcss/defaultTheme")
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class", '[data-theme="dark"]'],
-  content: ["./src/components/**/*.{ts,tsx}", "./src/pages/**/*.{ts,tsx}",],
+  content: [
+    "./src/components/**/*.{ts,tsx}",
+    "./src/pages/**/*.{ts,tsx}",
+    "./node_modules/@tremor/**/*.{js,ts,jsx,tsx}"
+  ],
   theme: {
     extend: {
       colors: {
@@ -26,7 +30,7 @@ module.exports = {
       },
       fontFamily: {
         // syne font is the marketing font
-        sans: ["var(--syne-font)", ...defaultTheme.fontFamily.sans],
+        sans: ["Cal Sans", ...defaultTheme.fontFamily.sans],
       },
       keyframes: {
         "accordion-down": {

@@ -22,10 +22,10 @@ model Course {
     createdAt   DateTime     @default(now())
     updatedAt   DateTime     @updatedAt
     enrollments Enrollment[]
-    lectures    Lecture[]
+    lessons     Lesson[]
 }
 
-model Lecture {
+model Lesson {
     id           String      @id @default(uuid())
     title        String
     videoUrl     String?
@@ -38,14 +38,14 @@ model Lecture {
 }
 
 model Enrollment {
-    id                String    @id @default(uuid())
-    userId            String
-    user              User      @relation(fields: [userId], references: [id])
-    courseId          String
-    course            Course    @relation(fields: [courseId], references: [id])
-    completedLectures Lecture[]
-    createdAt         DateTime  @default(now())
-    updatedAt         DateTime  @updatedAt
+    id               String   @id @default(uuid())
+    userId           String
+    user             User     @relation(fields: [userId], references: [id])
+    courseId         String
+    course           Course   @relation(fields: [courseId], references: [id])
+    completedLessons Lesson[]
+    createdAt        DateTime @default(now())
+    updatedAt        DateTime @updatedAt
 }
 
 model Gamification {

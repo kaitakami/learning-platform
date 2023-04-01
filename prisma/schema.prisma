@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
+    provider = "postgresql"
     // NOTE: When using postgresql, mysql or sqlserver, uncomment the @db.Text annotations in model Account below
     // Further reading:
     // https://next-auth.js.org/adapters/prisma#create-the-prisma-schema
@@ -14,8 +14,46 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Example {
-    id        String   @id @default(cuid())
+model Course {
+    id          String       @id @default(uuid())
+    title       String
+    description String?
+    image       String?
+    createdAt   DateTime     @default(now())
+    updatedAt   DateTime     @updatedAt
+    enrollments Enrollment[]
+    lectures    Lecture[]
+}
+
+model Lecture {
+    id           String      @id @default(uuid())
+    title        String
+    videoUrl     String?
+    courseId     String
+    course       Course      @relation(fields: [courseId], references: [id])
+    createdAt    DateTime    @default(now())
+    updatedAt    DateTime    @updatedAt
+    Enrollment   Enrollment? @relation(fields: [enrollmentId], references: [id])
+    enrollmentId String?
+}
+
+model Enrollment {
+    id                String    @id @default(uuid())
+    userId            String
+    user              User      @relation(fields: [userId], references: [id])
+    courseId          String
+    course            Course    @relation(fields: [courseId], references: [id])
+    completedLectures Lecture[]
+    createdAt         DateTime  @default(now())
+    updatedAt         DateTime  @updatedAt
+}
+
+model Gamification {
+    id        String   @id @default(uuid())
+    userId    String   @unique
+    user      User     @relation(fields: [userId], references: [id])
+    points    Int      @default(0)
+    level     Int      @default(0)
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
@@ -27,12 +65,12 @@ model Account {
     type              String
     provider          String
     providerAccountId String
-    refresh_token     String? // @db.Text
-    access_token      String? // @db.Text
+    refresh_token     String? @db.Text
+    access_token      String? @db.Text
     expires_at        Int?
     token_type        String?
     scope             String?
-    id_token          String? // @db.Text
+    id_token          String? @db.Text
     session_state     String?
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -48,13 +86,15 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
+    id            String        @id @default(cuid())
     name          String?
-    email         String?   @unique
+    email         String?       @unique
     emailVerified DateTime?
     image         String?
     accounts      Account[]
     sessions      Session[]
+    enrollments   Enrollment[]
+    gamification  Gamification?
 }
 
 model VerificationToken {

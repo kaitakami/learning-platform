@@ -14,7 +14,7 @@ const PricingPage = () => {
           </div>
           <div className="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
             {/* <!-- Pricing Card --> */}
-            <div className="flex flex-col p-6 mx-auto max-w-lg text-center text-stone-900 bg-white rounded-lg border border-stone-100 shadow dark:border-stone-600 xl:p-8 dark:bg-stone-800 dark:text-white">
+            <div className="flex flex-col p-6 mx-auto max-w-lg text-center text-stone-900 bg-white rounded-lg border border-stone-100 shadow dark:border-stone-600 xl:p-8 dark:bg-stone-800 dark:text-white hover:scale-105 transition-transform">
               <h3 className="mb-4 text-2xl font-semibold">Schoolarship</h3>
               <p className="font-light text-stone-500 sm:text-lg dark:text-stone-400">Apply for a schoolarship and get access to all the content for free.</p>
               <div className="flex justify-center items-baseline my-8">
@@ -52,7 +52,7 @@ const PricingPage = () => {
               <Link href="#" className={`${buttonVariants()}`}>Apply</Link>
             </div>
             {/* <!-- Pricing Card --> */}
-            <div className="flex flex-col p-6 mx-auto max-w-lg text-center text-stone-900 bg-white rounded-lg border border-stone-100 shadow dark:border-stone-600 xl:p-8 dark:bg-stone-800 dark:text-white">
+            <div className="flex flex-col p-6 mx-auto max-w-lg text-center text-stone-900 bg-white rounded-lg border border-stone-100 shadow dark:border-stone-600 xl:p-8 dark:bg-stone-800 dark:text-white hover:scale-105 transition-transform">
               <h3 className="mb-4 text-2xl font-semibold">PRO</h3>
               <p className="font-light text-stone-500 sm:text-lg dark:text-stone-400">Get access to all the courses and free updates.</p>
               <div className="flex justify-center items-baseline my-8">
@@ -90,8 +90,8 @@ const PricingPage = () => {
               <Link href="#" className={`${buttonVariants({ variant: "colored" })}`}>Get started</Link>
             </div>
             {/* <!-- Pricing Card --> */}
-            <div className="flex flex-col p-6 mx-auto max-w-lg text-center text-stone-900 bg-white rounded-lg border border-stone-100 shadow dark:border-stone-600 xl:p-8 dark:bg-stone-800 dark:text-white">
-              <h3 className="mb-4 text-2xl font-semibold">Enterprise</h3>
+            <div className="flex flex-col p-6 mx-auto max-w-lg text-center text-stone-900 bg-white rounded-lg border border-stone-100 shadow dark:border-stone-600 xl:p-8 dark:bg-stone-800 dark:text-white hover:scale-105 transition-transform">
+              <h3 className="mb-4 text-2xl font-semiboldhover:scale-110">Enterprise</h3>
               <p className="font-light text-stone-500 sm:text-lg dark:text-stone-400">Take your devs to the next level with our self-paced courses.</p>
               <div className="flex justify-center items-baseline my-8">
                 <span className="mr-2 text-3xl sm:text-4xl md:text-5xl font-extrabold">Custom</span>

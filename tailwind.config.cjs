@@ -28,10 +28,6 @@ module.exports = {
       screens: {
         'xs': '400px',
       },
-      fontFamily: {
-        // syne font is the marketing font
-        sans: ["Cal Sans", ...defaultTheme.fontFamily.sans],
-      },
       keyframes: {
         "accordion-down": {
           from: { height: 0 },

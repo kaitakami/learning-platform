@@ -1,8 +1,14 @@
 import type { ReactElement } from "react"
+import { DM_Sans } from "next/font/google"
 
-const Layout = (props: {children: ReactElement | ReactElement[]}) => {
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+})
+
+const Layout = (props: { children: ReactElement | ReactElement[] }) => {
   return (
-    <div>
+    <div className={`${dmSans.className} min-h-screen`}>
       {props.children}
     </div>
   )

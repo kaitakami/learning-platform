@@ -46,7 +46,7 @@ const courses: { title: string; href: string; description: string }[] = [
   }
 ]
 
-const Navbar = ({ delay = 0}) => {
+const Navbar = ({ delay = 0 }) => {
   const { theme, setTheme } = useTheme()
   return (
     <motion.div
@@ -126,7 +126,7 @@ const Navbar = ({ delay = 0}) => {
   )
 }
 
-const ListItem = React.forwardRef<
+export const ListItem = React.forwardRef<
   React.ElementRef<"a">,
   React.ComponentPropsWithoutRef<"a">
 >(({ className, title, children, href, ...props }, ref) => {

@@ -96,6 +96,3 @@ const Navbar = () => {
     </motion.div>
   )
 }
-
-
-

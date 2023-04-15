@@ -2,9 +2,11 @@ import Layout from "@/src/components/app/Layout"
 import { Separator } from "@/src/components/ui/separator"
 import { H2 } from "@/src/components/ui/headings";
 import { useSession } from "next-auth/react";
+import { api } from "@/src/utils/api";
 
 function Dashboard() {
   const { data } = useSession()
+
   return (
     <Layout>
       <div className="lg:grid grid-cols-10">
@@ -14,7 +16,7 @@ function Dashboard() {
           transition={{ duration: 0.5 }}
           className="col-span-3 xl:col-span-2 hidden lg:block h-screen overflow-y-auto bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-stone-100 to-stone-200 dark:from-stone-800 dark:to-stone-900 shadow-xl py-16 border-r border-stone-200 dark:border-stone-700"
         >
-          <H2 className="px-4">Your learning progress ✨</H2>
+          <H2 className="px-4">Tu progreso de aprendizaje ✨</H2>
           <Separator className="mt-5 mb-10" />
           <div className="flex flex-col px-5 gap-4">
             <Course
@@ -29,7 +31,7 @@ function Dashboard() {
             {/* ENROLL TO A NEW COURSE CTA */}
             <Link href="#" className="w-full px-3 py-5 rounded-lg hover:shadow-lg dark:hover:shadow-neutral-900 hover:shadow-neutral-200
             border-dashed border-2 dark:border-stone-700 border-stone-300 h-52 flex justify-center flex-col dark:hover:bg-stone-900 hover:bg-stone-100 transition-all">
-              <p className="text-3xl font-medium text-center text-stone-500 dark:text-stone-500 ">Enroll to a new course</p>
+              <p className="text-3xl font-medium text-center text-stone-500 dark:text-stone-500 ">Inscríbete a un nuevo curso</p>
             </Link>
           </div>
         </motion.div>
@@ -37,7 +39,6 @@ function Dashboard() {
           <Header name={data?.user?.name || ""} />
           <Cards />
           {/* Grid with contributions graph and CTA (lateral mini sidebar) to Enzan, create a project */}
-          {/* Roadmap section emphasizing community driven / Open source, Contribution CTA (simple button with backlog and Roadmap linear) */}
           <Roadmap />
         </div>
       </div>
@@ -106,7 +107,7 @@ const Header = ({ name }: { name: string }) => {
     <div className="bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-stone-100 to-stone-200 dark:from-stone-800 dark:to-stone-900 p-8 flex rounded-md border dark:border-stone-700 border-stone-200 justify-between flex-wrap space-y-4">
       <div className="flex gap-3 flex-wrap">
         <H2>
-          Welcome back <br /> {name}
+          Hola <br /> {name}
 
           {/* Show personalized message depending on how many points the user got this week */}
           {/* Could add an illustration */}

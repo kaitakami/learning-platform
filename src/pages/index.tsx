@@ -7,9 +7,10 @@ import { buttonVariants } from "../components/ui/button";
 import { Button } from "../components/ui/button";
 import { Github, ArrowRight, Briefcase, Gamepad, Keyboard, PiggyBank, Ship, Timer } from "lucide-react"
 import { toast } from 'react-hot-toast';
-
+import { useSession } from 'next-auth/react';
 
 const Home: NextPage = () => {
+  const { data } = useSession()
   useEffect(() => {
     function githubStarToast() {
       toast(<>If you like Enzan Learn, please star it on Github! <Link href="https://github.com/kaitakami" target="_blank" className={buttonVariants()}><Github /></Link></>, { duration: 4000, position: "bottom-center", icon: "✨" })
@@ -34,46 +35,79 @@ import { useRef, useState } from "react";
 import { signIn } from 'next-auth/react';
 
 const HeroSection = () => {
+  const heroRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const updateMousePosition = (ev: MouseEvent) => {
+      if (!heroRef.current) return
+      const { clientX, clientY } = ev
+
+      heroRef.current.style.setProperty("--x", `${clientX}px`)
+      heroRef.current.style.setProperty("--y", `${clientY}px`)
+    }
+
+    window.addEventListener("mousemove", updateMousePosition)
+
+    return () => {
+      window.removeEventListener("mousemove", updateMousePosition)
+    }
+  }, [])
   return (
-    <section className="grid-pattern min-h-screen flex items-center">
-      <div className="grid max-w-screen-xl px-4 py-24 mx-auto lg:gap-8 md:py-20 xl:gap-16 lg:grid-cols-12">
-        <div className="max-w-4xl mr-auto place-self-center lg:col-span-7 xl:col-span-8 md:col-span-6">
-          <motion.h1
-            className="mb-4 text-4xl sm:text-5xl font-extrabold tracking-tight leading-none xl:text-6xl bg-gradient-to-tr dark:from-gray-100 dark:to-slate-300 from-slate-700 to-slate-900 bg-clip-text text-transparent capitalize"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          >
-            Become a Full Stack Developer:<span className="sm:block hidden"> Learn By Coding</span>
-          </motion.h1>
-          <motion.p
-            className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
-          >
-            Level up your full stack skills with Enzan Learn! Our self-paced courses and <span className="dark:text-white text-zinc-800">learn-by-doing</span> approach will have you building impressive projects in no time - <span className="dark:text-white text-zinc-800">sign up free today</span> and become a full stack dev ✨
-          </motion.p>
-          <motion.div
-            className="flex gap-4 flex-col xs:flex-row"
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ ease: "easeOut", duration: 0.7, delay: 1.6 }}
-          >
-            <Link className={`${buttonVariants({ variant: "colored" })}`} href="/pricing">
-              Free Just Now
-            </Link>
-            <Button className="dark:hover:shadow-white/75 hover:shadow-sm hover:shadow-black/25 group" size="lg" onClick={() => { signIn().catch(err => console.log(err)) }}>
-              Start Learning<ArrowRight className="group-hover:translate-x-3 transition-transform" />
-            </Button>
-          </motion.div>
-        </div>
-        <div className="lg:mt-0 lg:col-span-4 lg:flex md:col-span-6 pt-12 lg:pt-0">
-          <div className="box"></div>
-          <AnimatedCard />
-        </div>
+    <>
+      <style jsx>
+        {`
+        .gradient-follow {
+          background-image: radial-gradient(
+            circle farthest-side at var(--x) var(--y),
+            #4c94ff33 0%,
+            #4c94ff1c 20%,
+            transparent 100%
+          )
+        }
+      `}
+      </style>
+      <div className="grid-pattern">
+        <section ref={heroRef} className='mx-auto min-h-screen flex items-center gradient-follow'>
+          <div className="grid max-w-screen-xl px-4 py-24 mx-auto lg:gap-8 md:py-20 xl:gap-16 lg:grid-cols-12">
+            <div className="max-w-4xl mr-auto place-self-center lg:col-span-7 xl:col-span-8 md:col-span-6">
+              <motion.h1
+                className="mb-4 text-3xl xs:text-4xl sm:text-5xl font-extrabold tracking-tight leading-none xl:text-6xl bg-gradient-to-tr dark:from-gray-100 dark:to-slate-300 from-slate-700 to-slate-900 bg-clip-text text-transparent"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
+                Conviértete en Full Stack dev:<span className="sm:block hidden">Aprende programando</span>
+              </motion.h1>
+              <motion.p
+                className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1 }}
+              >
+                Sube al siguiente nivel con Enzan Learn! Nuestros cursos te permiten aprender a tu ritmo y con una metodología <span className="dark:text-white text-zinc-800">aprende creando</span> para que puedas construir proyectos impresionantes en <span className="dark:text-white text-zinc-800">tiempo record</span> ✨
+              </motion.p>
+              <motion.div
+                className="flex gap-4 flex-col xs:flex-row"
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ ease: "easeOut", duration: 0.7, delay: 1.6 }}
+              >
+                <Link className={`${buttonVariants({ variant: "colored" })}`} href="/pricing">
+                  Cursos
+                </Link>
+                <Button className="dark:hover:shadow-white/75 hover:shadow-sm hover:shadow-black/25 group" size="lg" onClick={() => { signIn().catch(err => console.log(err)) }}>
+                  Empieza a aprender<ArrowRight className="group-hover:translate-x-3 transition-transform" />
+                </Button>
+              </motion.div>
+            </div>
+            <div className="lg:mt-0 lg:col-span-4 lg:flex md:col-span-6 pt-12 lg:pt-0">
+              <div className="box"></div>
+              <AnimatedCard />
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
+    </>
   );
 };
 
@@ -109,12 +143,12 @@ const AnimatedCard = () => {
       }}
     >
       <ul className="flex flex-col justify-between h-full py-10 px-8">
-        <li className="flex gap-2 my-auto md:text-xl"><Gamepad />Gamified Experience</li>
-        <li className="flex gap-2 my-auto md:text-xl"><PiggyBank />Free in Beta Version</li>
-        <li className="flex gap-2 my-auto md:text-xl"><Keyboard />Learn by doing</li>
-        <li className="flex gap-2 my-auto md:text-xl"><Timer />Divided in short classes</li>
-        <li className="flex gap-2 my-auto md:text-xl"><Briefcase />Build your Portfolio</li>
-        <li className="flex gap-2 my-auto md:text-xl"><Ship />Create with other Devs</li>
+        <li className="flex gap-2 my-auto md:text-xl"><Gamepad />Gamificación</li>
+        <li className="flex gap-2 my-auto md:text-xl"><PiggyBank />Gratis y becas</li>
+        <li className="flex gap-2 my-auto md:text-xl"><Keyboard />Aprendizaje activo</li>
+        <li className="flex gap-2 my-auto md:text-xl"><Timer />Dividido en clases cortas</li>
+        <li className="flex gap-2 my-auto md:text-xl"><Briefcase />Construye tu portfolio</li>
+        <li className="flex gap-2 my-auto md:text-xl"><Ship />Crea con otros devs</li>
       </ul>
     </motion.div>
   )

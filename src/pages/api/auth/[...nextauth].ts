@@ -1,6 +1,7 @@
-import NextAuth, { type NextAuthOptions } from "next-auth";
+import NextAuth, { type NextAuthOptions, type Session } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
+import { randomUUID, randomBytes } from "crypto";
 
 // Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
@@ -11,13 +12,24 @@ import { prisma } from "../../../server/db";
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
-    session({ session, user }) {
+    session({ session, token }) {
       if (session.user) {
-        session.user.id = user.id;
+        session.user.id = String(token.sub);
       }
       return session;
     },
   },
+  session: {
+    strategy: "jwt",
+    maxAge: 29 * 24 * 60 * 60, // 30 days
+    generateSessionToken: () => {
+      return randomUUID?.() ?? randomBytes(32).toString("hex");
+    },
+  },
+  jwt: {
+    maxAge: 29 * 24 * 60 * 60, // 30 days
+  },
+
   // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
   providers: [

@@ -21,6 +21,16 @@ model Course {
     lessons          Lesson[]
 }
 
+model Badge {
+    id          String   @id @default(uuid())
+    name        String
+    image       String
+    description String
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    users       User[]
+}
+
 model Lesson {
     id           String      @id @default(uuid())
     title        String
@@ -103,6 +113,7 @@ model User {
     sessions      Session[]
     enrollments   Enrollment[]
     gamification  Gamification?
+    badges        Badge[]
 }
 
 model VerificationToken {

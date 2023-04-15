@@ -16,9 +16,9 @@ import {
   NavigationMenuTrigger,
 } from "@/src/components/ui/navigation-menu"
 import { Logo } from "../logo"
-import { Button } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
 import { SunMoon, User } from "lucide-react";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 const courses: { title: string; href: string; description: string }[] = [
   {
@@ -48,6 +48,8 @@ const courses: { title: string; href: string; description: string }[] = [
 
 const Navbar = ({ delay = 0 }) => {
   const { theme, setTheme } = useTheme()
+  const { data } = useSession()
+
   return (
     <motion.div
       className="w-full max-w-7xl mx-auto"
@@ -59,7 +61,6 @@ const Navbar = ({ delay = 0 }) => {
         <NavigationMenuList className="max-w-xl mx-auto w-full gap-0.5 sm:gap-2">
           <Link href="/" className="flex items-center font-bold gap-1 sm:gap-2">
             <Logo className="w-8 h-8 fill-stone-900 dark:fill-slate-100" fill="fill-logo" />
-            <span className="text-xl hidden sm:block">Enzan</span>
           </Link>
           <NavigationMenuItem>
             <NavigationMenuTrigger>Overview</NavigationMenuTrigger>
@@ -76,25 +77,25 @@ const Navbar = ({ delay = 0 }) => {
                         Enzan Learn
                       </div>
                       <p className="text-sm leading-tight text-white/90 dark:text-black/90">
-                        Become a full stack developer.
+                        Conviértete en un Full Stack dev
                       </p>
                     </Link>
                   </NavigationMenuLink>
                 </li>
-                <ListItem href="/introduction" title="Introduction">
-                  Discover how to use Enzan and start learning.
+                <ListItem href="/introduction" title="Introducción">
+                  Descubre como funciona Enzan Learn y empieza a aprender.
                 </ListItem>
                 <ListItem href="/pricing" title="Pricing">
-                  Learn about the pricing plans.
+                  Precios? Qué es eso?
                 </ListItem>
                 <ListItem href="/roadmap" title="Roadmap">
-                  See what&apos;s coming next.
+                  Mira las próximas actualizaciones.
                 </ListItem>
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
           <NavigationMenuItem className="hidden sm:block">
-            <NavigationMenuTrigger>Learn</NavigationMenuTrigger>
+            <NavigationMenuTrigger>Aprende</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
                 {courses.map((course) => (
@@ -118,8 +119,22 @@ const Navbar = ({ delay = 0 }) => {
           </NavigationMenuItem>
         </NavigationMenuList>
         <div className="space-x-2 items-center flex">
-          <Button variant="link" size="sm" onClick={() => { signIn().catch(err => console.log(err)) }}><span className="sm:block hidden">Sign in</span><User className="sm:hidden" /></Button>
-          <Button size="sm" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}><SunMoon /></Button>
+          {data?.user?.id ? (
+            <Link className={buttonVariants({ size: "sm" })} href={`/user/${data?.user?.id}`}><User /></Link>
+          )
+            :
+            <Button
+              variant="link"
+              size="sm"
+              onClick={() => { signIn().catch(err => console.log(err)) }}>
+              <span className="sm:block hidden">Inicia sesión</span>
+              <User className="sm:hidden" />
+            </Button>
+
+          }
+          <Button size="sm" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+            <SunMoon />
+          </Button>
         </div>
       </NavigationMenu>
     </motion.div>

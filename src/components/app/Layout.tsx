@@ -16,7 +16,7 @@ import { Logo } from "../logo"
 import { Button } from "../ui/button";
 import { SunMoon } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { Avatar, AvatarImage, AvatarFallback } from "../ui/avatar";
+import CustomAvatar from "../shared/customAvatar";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -39,7 +39,7 @@ const Navbar = () => {
   const { theme, setTheme } = useTheme()
   return (
     <motion.div
-      className="w-full mx-auto border-b border-stone-200 dark:border-stone-700 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-stone-100 to-stone-100/75 dark:from-stone-800 dark:to-stone-900"
+      className={`w-full mx-auto border-b border-stone-200 dark:border-stone-700 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-stone-100 to-stone-100/75 dark:from-stone-800 dark:to-stone-900 ${dmSans.className}`}
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -48,7 +48,6 @@ const Navbar = () => {
         <NavigationMenuList className="max-w-xl mx-auto w-full gap-0.5 sm:gap-2">
           <Link href="/" className="flex items-center font-bold gap-1 sm:gap-2">
             {<Logo className="w-8 h-8 dark:fill-slate-100 fill-stone-900" fill="fill-logo" />}
-            <span className="text-xl hidden sm:block">Enzan</span>
           </Link>
           <NavigationMenuItem>
             <NavigationMenuTrigger>Overview</NavigationMenuTrigger>
@@ -65,32 +64,35 @@ const Navbar = () => {
                         Enzan Learn
                       </div>
                       <p className="text-sm leading-tight text-white/90 dark:text-black/90">
-                        Become a full stack developer.
+                        Conviertete en un Full Stack dev
                       </p>
                     </Link>
                   </NavigationMenuLink>
                 </li>
                 <ListItem href="/introduction" title="Introduction">
-                  Discover how to use Enzan and start learning.
+                  Descubre como usar Enzan Learn y empieza a aprender.
                 </ListItem>
                 <ListItem href="/pricing" title="Pricing">
-                  Learn about the pricing plans.
+                  Tenemos planes, pero precios?
                 </ListItem>
                 <ListItem href="/roadmap" title="Roadmap">
-                  See what&apos;s coming next.
+                  Mira en que estamos trabajando.
                 </ListItem>
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
         </NavigationMenuList>
-        <div className="space-x-2 items-center flex">
-          <Link href={"/app/user"}>
-            <Avatar>
-              <AvatarImage src={data?.user?.image || ""} />
-              <AvatarFallback>{data?.user?.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
-            </Avatar>
-          </Link>
-          <Button size="sm" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}><SunMoon /></Button>
+        <div className="sm:space-x-5 space-x-2 items-center flex">
+          <CustomAvatar
+            name={data?.user?.name || ""}
+            image={data?.user?.image || ""}
+          />
+          <Button
+            size="sm"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")
+            }>
+            <SunMoon />
+          </Button>
         </div>
       </NavigationMenu>
     </motion.div>

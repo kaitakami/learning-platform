@@ -6,7 +6,9 @@ import { api } from "@/src/utils/api";
 
 function Dashboard() {
   const { data } = useSession()
-
+  const { data: enrollments } = api.enrollment["get-user-enrollments"].useQuery({ id: data?.user?.id || "" })
+  const { data: gamification } = api.gamification["get-user-gamification"].useQuery({ id: data?.user?.id || "" })
+  console.log(gamification)
   return (
     <Layout>
       <div className="lg:grid grid-cols-10">

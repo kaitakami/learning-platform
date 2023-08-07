@@ -3,7 +3,7 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure, protectedProcedure } from "../trpc";
 
 export const enrollmentRouter = createTRPCRouter({
-  enrollments: publicProcedure
+  ["get-user-enrollments"]: publicProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ ctx, input: { id } }) => {
       return await ctx.prisma.enrollment.findMany({
